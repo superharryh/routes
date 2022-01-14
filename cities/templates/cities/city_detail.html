@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 
+{% block title %} {{ city_detail.name }} {% endblock %}
 
 {% block content %}
 
@@ -11,7 +12,7 @@
 <div class="row">
     <div class="col-md-4">
         <a href="{% url 'app_cities:cities' %}"> <!-- url 'namespace for app's name (from project/urls.py) : name for url (from app/urls.py)'  -->
-            <button type="button" class="btn btn-light">Назад</button>
+            <button type="button" class="btn btn-primary">Назад</button>
         </a> 
         
     </div>

@@ -2,6 +2,8 @@
 
 {% extends 'base.html' %}
 
+{% block title %} Города {% endblock %}
+
 {% block content %}
 
 <h1>Список городов</h1>
@@ -11,8 +13,9 @@
         {% for city in cities_list %}  <!-- from views.py -- def cities(request): -->
             <p>
                 <a href="{% url 'app_cities:detail' pk=city.pk %}">{{ city.name }}</a>
-            <p/>
+            </p>
         {% endfor %}
     </div>
 </div>
+  
 {% endblock %}
