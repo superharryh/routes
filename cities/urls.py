@@ -1,6 +1,7 @@
+from cities import views
 from django.urls import path
-from cities.views import *
 
 urlpatterns = [
-    path('city_list', cities, name=cities), #name=home 
+    path('', views.cities_list, name='cities'), 
+    path('detail/<int:pk>', views.CityDetailView.as_view(), name='detail'), 
 ]
