@@ -15,6 +15,6 @@ class City(models.Model):
         #задаем порядок объектов модели по алфавиту:
         ordering = ['name']
     
-    def get_absolute_url(self): # or можно использовать success_url в views.py в той view, в которой создаем объект
-    # позволяет Django переходить на страницу city_detail.html этого только что созданного объекта.
-        return reverse('app_cities:detail', kwargs={'pk':self.pk})
+    # def get_absolute_url(self): # or можно использовать success_url в views.py в той view, в которой создаем объект
+    # # позволяет Django переходить на страницу city_detail.html этого только что созданного объекта.
+    #     return reverse('app_cities:detail', kwargs={'pk':self.pk})
