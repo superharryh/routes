@@ -23,5 +23,6 @@ urlpatterns = [
     path('about/', views.about),
 
     path('cities/', include(('cities.urls', 'app_cities'))),
+    path('trains/', include(('trains.urls', 'app_trains'))),
     
 ]

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} Добавить поезд{% endblock %}
+
+{% block content %}
+
+<h1>Добавить поезд</h1>
+
+{% include "form.html" with button='Сохранить'%}
+
+{% endblock %}

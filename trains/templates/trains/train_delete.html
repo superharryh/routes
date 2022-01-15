@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} Удалить город{% endblock %}
+
+{% block content %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Уверены, что хотите удалить <strong>{{ object }}</strong>?
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> 
+
+{% include "form.html" with button='Удалить'%} 
+<a href="{% url 'app_cities:list_of_cities' %}"> <!-- url 'namespace for app's name (from project/urls.py) : name for url (from app/urls.py)'  -->
+    <button type="button" class="btn btn-light">Назад</button>
+</a> 
+{% endblock %}

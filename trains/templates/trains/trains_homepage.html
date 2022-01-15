@@ -2,34 +2,53 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Города {% endblock %}
+{% block title %} Поезда {% endblock %}
 
 {% block content %}
 
 
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h1 class="col-md-6 mx-auto">Список городов</h1>
+        <h1 class="col-md-6 mx-auto">Список поездов</h1>
         <table class="table table-striped">
-        {% for city in page_obj %}  <!-- pagination from views.py -- class CityListView(ListView): -->
             <tr>
-                <td>
-                    <a href="{% url 'app_cities:detail' pk=city.pk %}">{{ city.name }}</a>
-                </td>
-
-                <td>
-                    <a href="{% url 'app_cities:update' pk=city.pk %}">
-                        <button type="button" class="btn btn-info">Редактировать</button>
-                    </a>
-                </td>
-
-                <td>
-                    <a href="{% url 'app_cities:delete' pk=city.pk %}">
-                        <button type="button" class="btn btn-danger">Удалить</button>
-                    </a>
-                </td>
+                <th>Номер</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время в пути</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
-        {% endfor %}
+            {% for train in page_obj %}  <!-- pagination from views.py -- class TrainListView(ListView): -->
+                <tr>
+                    <td>
+                        <a href="{% url 'app_trains:detail' pk=train.pk %}">{{ train.name }}</a>
+                    </td>
+
+                    <td>
+                        {{ train.from_city }}
+                    </td>
+
+                    <td>
+                        {{ train.to_city }}
+                    </td>
+
+                    <td>
+                        {{ train.travel_time }}
+                    </td>
+
+                    <td>
+                        <a href="{% url 'app_trains:update' pk=train.pk %}">
+                            <button type="button" class="btn btn-info">Редактировать</button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'app_trains:delete' pk=train.pk %}">
+                            <button type="button" class="btn btn-danger">Удалить</button>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -83,6 +102,5 @@
       
     </ul>
 </nav>
-
 
 {% endblock %}

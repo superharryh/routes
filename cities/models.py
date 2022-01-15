@@ -11,6 +11,7 @@ class City(models.Model):
 
     #изменить название самой модели и ее объектов в админ:
     class Meta:
+        verbose_name = 'Город'
         verbose_name_plural = 'Города'
         #задаем порядок объектов модели по алфавиту:
         ordering = ['name']

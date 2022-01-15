@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} {{ train_detail.name }} {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="col-md-6 mx-auto">Поезд № {{ train_detail.name }}</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время в пути</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+
+                <tr>
+                    <td>
+                        {{ train_detail.from_city }}
+                    </td>
+
+                    <td>
+                        {{ train_detail.to_city }}
+                    </td>
+
+                    <td>
+                        {{ train_detail.travel_time }}
+                    </td>
+
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+        </table>
+    </div>
+</div>
+<a href="{% url 'app_trains:list_of_trains' %}"> <!-- url 'namespace for app's name (from project/urls.py) : name for url (from app/urls.py)'  -->
+    <button type="button" class="btn btn-primary">Назад</button>
+</a> 
+{% endblock %}
