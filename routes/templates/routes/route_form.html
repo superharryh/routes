@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} Поиск маршрута{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12 mx-auto">
+        {% if routes %} 
+        <!-- context['routes'] = sorted_routes из get_routes_func.py, который контачит с def find_routes(request): (views.py) через project's urls.py -->
+            
+            <h3>Маршрут{% if routes|length != 1 %}ы{% endif %} 
+                из г. {{ cities.from_city  }} в г. {{ cities.to_city }}</h3> 
+            <!-- context['cities'] = {'from_city': from_city.name, 'to_city': to_city.name} из get_routes_func.py; в шаблонах обращение к ключам словаря через .-->
+           
+            {% for route in routes  %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">
+                            Маршрут №{{ forloop.counter }}
+                            {% if forloop.first %} - <strong>Самый короткий маршрут</strong> {% endif %}
+                        </th>
+                        <th>Общее время в пути: {{ route.total_time }} минут(a)</th> <!-- == tmp['total_time'] = total_time из get_routes_func.py общее время в пути для каждого маршрута-->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for train in route.trains %} <!-- == tmp["trains"].append(q) из get_routes_func.py-->
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>Поезд №{{ train.name }} из г. {{ train.from_city.name }} в г. {{ train.to_city.name }}, время в пути: {{ train.travel_time }} минут(a)</td>
+                        <!-- <td>{{ train }}, время в пути {{ train.travel_time }}</td> -->
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <br>
+            {% endfor %}
+
+            {% else %}
+                <h1>Поиск маршрута</h1>
+                {% url 'find_routes' as action %}
+                {% include "form.html" with button='Найти' action=action%}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

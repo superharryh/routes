@@ -17,7 +17,7 @@ class Train(models.Model):
     # это можно использовать в том случае, чтобы избежать перекрёстного испорта моделей.
 
     def __str__(self):
-        return f"Поезд № {self.name} из города {self.from_city} в город {self.to_city}"
+        return f"Поезд № {self.name} из города {self.from_city} в город {self.to_city}, время в пути: {self.travel_time}"
 
     #изменить название самой модели и ее объектов в админ:
     class Meta:
