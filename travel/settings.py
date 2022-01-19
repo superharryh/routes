@@ -146,7 +146,7 @@ LOGGING = {
         },
     },
     'handlers': { # отвечает за то, каким образом мы будем обрабытвать полученное сообщение в логгинге
-        'console': { # сщщбщение можно выводить в консоль
+        'console': { # сообщение можно выводить в консоль
             'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',

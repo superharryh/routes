@@ -23,8 +23,7 @@ def get_graph(qs):
 def get_routes(request, form) -> dict:
     context = {'form': form}
 
-    qs = Train.objects.all().select_related('from_city', 'to_city') 
-    print(qs.query)
+    qs = Train.objects.all().select_related('from_city', 'to_city') # print(qs.query)
     graph = get_graph(qs)
     data = form.cleaned_data
     from_city = data['from_city']
@@ -83,7 +82,7 @@ def get_routes(request, form) -> dict:
         if total_time <= all_travel_time:
             right_routes.append(tmp) # right_routes - это список словарей, в котором каждый словарь - tmp, 
             # где мы знаем только знаечение tmp['total_time'] = total_time
-        print(right_routes)
+        # print(right_routes)
 
     if not right_routes:
         raise ValueError('Указанное время в пути меньше доступного для данного маршрута.')
