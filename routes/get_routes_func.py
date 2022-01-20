@@ -102,6 +102,6 @@ def get_routes(request, form) -> dict:
                     sorted_routes.append(route)
     # в форму, которую будем отображать на странице посел поиска, передаем полученные данные:
     context['routes'] = sorted_routes
-    context['cities'] = {'from_city': from_city.name, 'to_city': to_city.name}
+    context['cities'] = {'from_city': from_city, 'to_city': to_city}
 
     return context #так как этот context мы потом используем в views.py -> def find_routes(request):

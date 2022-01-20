@@ -22,6 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('find_routes/', views.find_routes, name='find_routes'),
+    path('add_route/', views.add_route, name='add_route'),
+    path('save_route/', views.save_route, name='save_route'),
 
     path('cities/', include(('cities.urls', 'app_cities'))),
     path('trains/', include(('trains.urls', 'app_trains'))),

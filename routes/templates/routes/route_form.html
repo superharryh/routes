@@ -12,10 +12,15 @@
         <!-- context['routes'] = sorted_routes из get_routes_func.py, который контачит с def find_routes(request): (views.py) через project's urls.py -->
             
             <h3>Маршрут{% if routes|length != 1 %}ы{% endif %} 
-                из г. {{ cities.from_city  }} в г. {{ cities.to_city }}</h3> 
+                из г. {{ cities.from_city.name  }} в г. {{ cities.to_city.name }}</h3> 
             <!-- context['cities'] = {'from_city': from_city.name, 'to_city': to_city.name} из get_routes_func.py; в шаблонах обращение к ключам словаря через .-->
            
             {% for route in routes  %}
+              <form action="{% url 'add_route' %}" method="post"> {% csrf_token %}
+                <input type="hidden" name="from_city" value="{{ cities.from_city.id  }}">
+                <input type="hidden" name="to_city" value="{{ cities.to_city.id  }}">
+                <input type="hidden" name="total_time" value="{{ route.total_time  }}">
+                <input type="hidden" name="trains" value="{% for train in route.trains %}{{ train.id }},{% endfor %}">
                 <table class="table">
                     <thead>
                       <tr>
@@ -37,11 +42,14 @@
                       {% endfor %}
                     </tbody>
                   </table>
-                  <br>
+                  <button type="submit" class="btn btn-success">Сохранить</button>
+                </form>
             {% endfor %}
 
+            <br>
+
             {% else %}
-                <h1>Поиск маршрута</h1>
+                <h1 class="col-md-4 mx-auto">Поиск маршрута</h1>
                 {% url 'find_routes' as action %}
                 {% include "form.html" with button='Найти' action=action%}
         {% endif %}

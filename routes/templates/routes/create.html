@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} Добавить название маршрута {% endblock %}
+
+{% block content %}
+
+<h1 class="col-md-4 mx-auto">Добавить название маршрута </h1>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form action="{% url 'save_route' %}" method="post"> {% csrf_token %}
+            {% for field in form %}
+                <div class="fieldWrapper">
+                    {{ field.errors }}
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <br>
+            <button type="submit" class="btn btn-success">Сохранить</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
