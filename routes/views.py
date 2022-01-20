@@ -4,9 +4,14 @@ from django.contrib import messages
 from .forms import RouteForm, RouteModelForm
 from trains.models import Train
 from cities.models import City
+from .models import Route
 
+from django.views.generic import ListView, DetailView, DeleteView
+from django.urls import reverse_lazy
 from .get_routes_func import get_routes
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin 
+from django.contrib.messages.views import SuccessMessageMixin
 
 def home(request):
     form = RouteForm()
@@ -87,4 +92,21 @@ def save_route(request):
         messages.error(request, 'Невозможно сохранить несуществующий маршрут')
         return redirect ('/')
 
+
+class RouteListView(ListView):
+    model = Route
+    paginate_by = 3
+    template_name = 'routes/routes_homepage.html'
+
+
+class RouteDetailView(DetailView):
+    context_object_name = "route_details" # это название мы будем использовать в route_detail.html, чтобы вытаскивать детали из route
+    queryset = Route.objects.all()
+    template_name = 'routes/route_detail.html'
     
+
+class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
+    model = Route
+    template_name = 'routes/route_delete.html'
+    success_url = reverse_lazy('app_trains:list_of_trains')
+    success_message = "Маршрут успешно удалён!"

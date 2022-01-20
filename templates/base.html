@@ -22,30 +22,51 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'app_cities:list_of_cities' %}">Города</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'app_trains:list_of_trains' %}">Поезда</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Добавить
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'app_cities:create' %}">Новый город</a></li>
+                    <li><a class="dropdown-item" href="{% url 'app_trains:create' %}">Новый поезд</a></li>
+                  </ul>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="#">
                   Добавить
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'app_cities:create' %}">Новый город</a></li>
-                  <li><a class="dropdown-item" href="{% url 'app_trains:create' %}">Новый поезд</a></li>
-                </ul>
-              </li>
+                  </a>
+                </li>
+              {% endif %}
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="{% url 'routes_list' %}" >Маршруты</a>
               </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'accounts:logout' %}" >Выйти</a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="nav-link" href="#" >{{ user.username }}</p>
+                </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}" >Войти</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:registration' %}" >Регистрация</a>
+              </li>
+              {% endif %}
             </ul>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
           </div>
         </div>
     </nav>

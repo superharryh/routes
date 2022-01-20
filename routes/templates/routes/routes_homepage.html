@@ -2,39 +2,41 @@
 
 {% extends 'base.html' %}
 
-{% block title %} Города {% endblock %}
+{% block title %} Маршруты {% endblock %}
 
 {% block content %}
 
 
 <div class="row">
     <div class="col-md-8 mx-auto">
-        <h1 class="col-md-6 mx-auto">Список городов</h1>
+        <h1 class="col-md-6 mx-auto">Список маршрутов</h1>
         <table class="table table-striped">
-        {% for city in page_obj %}  <!-- pagination from views.py -- class CityListView(ListView): -->
             <tr>
-                <td>
-                    <a href="{% url 'app_cities:detail' pk=city.pk %}">{{ city.name }}</a>
-                </td>
+                <th>Название</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Общее время в пути</th>
 
-                {% if user.is_authenticated %}
-                    <td>
-                        <a href="{% url 'app_cities:update' pk=city.pk %}">
-                            <button type="button" class="btn btn-info">Редактировать</button>
-                        </a>
-                    </td>
-
-                    <td>
-                        <a href="{% url 'app_cities:delete' pk=city.pk %}">
-                            <button type="button" class="btn btn-danger">Удалить</button>
-                        </a>
-                    </td>
-                {% else %}
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                {% endif %}
             </tr>
-        {% endfor %}
+            {% for route in page_obj %} 
+                <tr>
+                    <td>
+                        <a href="{% url 'route_detail' pk=route.pk %}">{{ route.name }}</a>
+                    </td>
+
+                    <td>
+                        {{ route.from_city }}
+                    </td>
+
+                    <td>
+                        {{ route.to_city }}
+                    </td>
+
+                    <td>
+                        {{ route.travel_times }}
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -88,6 +90,5 @@
       
     </ul>
 </nav>
-
 
 {% endblock %}

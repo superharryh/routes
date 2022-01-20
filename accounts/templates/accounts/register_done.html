@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block content %}
+
+<h1 class="col-md-4 mx-auto">Приветствуем Вас, {{ new_user }}</h1>
+
+<a class="btn btn-primary" href="{% url 'accounts:login' %}">Войти</a>
+
+{% endblock %}

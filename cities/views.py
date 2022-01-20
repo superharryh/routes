@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.core.paginator import Paginator
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # def cities_list(request):
 #     #put CityForm from forms.py:
@@ -33,7 +34,7 @@ class CityDetailView(DetailView):
     queryset = City.objects.all()
     
 
-class CityCreateView(SuccessMessageMixin, CreateView):
+class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = City
     form_class = CityForm
     template_name = 'cities/city_create.html'
@@ -43,14 +44,14 @@ class CityCreateView(SuccessMessageMixin, CreateView):
     # (которая наследуется от модели). Обязательно тут использовать reverse_lazy!
     success_message = "Город успешно добавлен!"
 
-class CityUpdateView(SuccessMessageMixin, UpdateView):
+class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = City
     form_class = CityForm
     template_name = 'cities/city_update.html'
     success_url = reverse_lazy('app_cities:list_of_cities')
     success_message = "Город успешно отредактирован!"
 
-class CityDeleteView(SuccessMessageMixin, DeleteView):
+class CityDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView): # LoginRequiredMixiт нужно добавлять после SuccessMessageMixin, если он есть 
     model = City
     template_name = 'cities/city_delete.html'
     success_url = reverse_lazy('app_cities:list_of_cities')

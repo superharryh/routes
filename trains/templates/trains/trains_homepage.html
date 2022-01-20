@@ -37,16 +37,22 @@
                         {{ train.travel_time }}
                     </td>
 
-                    <td>
-                        <a href="{% url 'app_trains:update' pk=train.pk %}">
-                            <button type="button" class="btn btn-info">Редактировать</button>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{% url 'app_trains:delete' pk=train.pk %}">
-                            <button type="button" class="btn btn-danger">Удалить</button>
-                        </a>
-                    </td>
+                    {% if user.is_authenticated %}
+                        <td>
+                            <a href="{% url 'app_trains:update' pk=train.pk %}">
+                                <button type="button" class="btn btn-info">Редактировать</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'app_trains:delete' pk=train.pk %}">
+                                <button type="button" class="btn btn-danger">Удалить</button>
+                            </a>
+                        </td>
+                    {% else %}
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    {% endif %}
+                    
                 </tr>
             {% endfor %}
         </table>
