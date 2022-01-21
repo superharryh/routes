@@ -12,9 +12,21 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+#! 4. Добавляем переменные окружения, которые мы будем использовать для подключения баз данных:
+#! таким образом мы прячем чувствительные данные:
+import os
+DB_NAME = os.environ.get('DB_NAME')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_HOST = os.environ.get('DB_HOST')
+DB_USER = os.environ.get('DB_USER')
+# SECRET_KEY = os.environ.get('SECRET_KEY') 
+# # при первом запуске, этот SECRET_KEY должен быть в виде закомментирован, 
+# а нижний SECRET_KEY должен быть указан в явном виде (как ниже), 
+# а затем нижний SECRET_KEY нужно удалить и раскомментировать этот SECRET_KEY
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATE_DIR = Path(BASE_DIR) / 'templates' # or TEMPLATE_DIR = BASE_DIR.joinpath('templates')
+BASE_DIR = Path(__file__).resolve().parent.parent.parent #! 1. добавляем .parent в конце
+TEMPLATE_DIR = Path(BASE_DIR) / 'templates'  
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -23,9 +35,9 @@ TEMPLATE_DIR = Path(BASE_DIR) / 'templates' # or TEMPLATE_DIR = BASE_DIR.joinpat
 SECRET_KEY = 'django-insecure-#0*j_d(7+b%sg4&i@%+7kbl7tgn4+!ab_5(y-zw=xd05+0$=0%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False #! 2. меняем на False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #! 3. после создания адреса для нашего приложения на Heroku, мы его сюда впишем
 
 
 # Application definition
@@ -45,6 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', #! 8. добавляем библиотеку whitenoise как middleware, т.е. библиотека whitenoise, которая работает со статикой, подключается к нашему проекту
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,11 +92,19 @@ WSGI_APPLICATION = 'travel.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgersql', #! 5. меняем sqlite3 на postgersql:
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': '5432' # стандартный порт для postgersql
+
     }
 }
-
+# необходимо для работы с Heroku:
+import dj_database_url
+db = dj_database_url.config()
+DATABASES['default'].update(db)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -173,3 +194,5 @@ LOGGING = {
         }
     }
 }
+
+STATIC_ROOT = TEMPLATE_DIR = Path(BASE_DIR) / 'staticfiles' #! 7.настройка местоположения, где будут лежать файлы со статикой
