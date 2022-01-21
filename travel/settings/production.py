@@ -19,7 +19,7 @@ DB_NAME = os.environ.get('DB_NAME')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
 DB_USER = os.environ.get('DB_USER')
-# SECRET_KEY = os.environ.get('SECRET_KEY') 
+SECRET_KEY = os.environ.get('SECRET_KEY') 
 # # при первом запуске, этот SECRET_KEY должен быть в виде закомментирован, 
 # а нижний SECRET_KEY должен быть указан в явном виде (как ниже), 
 # а затем нижний SECRET_KEY нужно удалить и раскомментировать этот SECRET_KEY
@@ -32,12 +32,12 @@ TEMPLATE_DIR = Path(BASE_DIR) / 'templates'
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#0*j_d(7+b%sg4&i@%+7kbl7tgn4+!ab_5(y-zw=xd05+0$=0%'
+SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False #! 2. меняем на False
 
-ALLOWED_HOSTS = ['*'] #! 3. после создания адреса для нашего приложения на Heroku, мы его сюда впишем
+ALLOWED_HOSTS = ['new-routes-app.herokuapp.com'] #! 9. после создания адреса для нашего приложения на Heroku, мы его сюда впишем
 
 
 # Application definition
