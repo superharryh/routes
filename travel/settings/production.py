@@ -149,50 +149,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': { # отвечает за то, каким образом будет выводиться сообщение в логгинге
-        'verbose': {
-            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
-            'style': '{',
-        },
-    #     'simple': {
-    #         'format': '{levelname} {message}',
-    #         'style': '{',
-    #     },
-    },
-    'filters': {
-        'require_debug_true': { # режим логгинга блокируется только если DEBUG=True
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
-    },
-    'handlers': { # отвечает за то, каким образом мы будем обрабытвать полученное сообщение в логгинге
-        'console': { # сообщение можно выводить в консоль
-            'level': 'DEBUG',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            # 'formatter': 'simple'
-        },
-        'file': { # сообщение можно выводить в консоль
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR.joinpath('log/application.log'), # указываем месторасположение файла с сообщением
-            'formatter': 'verbose'
-        },
-    },
-    'loggers': { # отвечает за то, что конкретно мы будем фиксировать и куда
-        'django.request': { # реквесты джанго фиксируем в файл
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'django.db.backends': { 
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            # 'filters': ['special']
-        }
-    }
-}
 
 STATIC_ROOT = Path(BASE_DIR) / 'staticfiles' #! 7.настройка местоположения, где будут лежать файлы со статикой
