@@ -195,4 +195,4 @@ LOGGING = {
     }
 }
 
-STATIC_ROOT = TEMPLATE_DIR = Path(BASE_DIR) / 'staticfiles' #! 7.настройка местоположения, где будут лежать файлы со статикой
+STATIC_ROOT = Path(BASE_DIR) / 'staticfiles' #! 7.настройка местоположения, где будут лежать файлы со статикой
