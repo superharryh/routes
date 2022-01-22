@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'trains',
     'routes',
     'accounts',
+    'django_dump_load_utf8',
 ]
 
 MIDDLEWARE = [

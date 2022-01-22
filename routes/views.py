@@ -48,14 +48,13 @@ def add_route(request):
             from_city_id = int(data['from_city'])
             to_city_id = int(data['to_city'])
             trains = data['trains'].split(',')
-            print(trains)
+
             trains_lst = [int(t) for t in trains if t.isdigit()]
-            print(trains_lst)
             # получаем поезда по id (собранному из данных выше)
             trains_qs = Train.objects.filter(id__in=trains_lst).select_related('from_city', 'to_city')
             # получаем города по id и переводим его в словарь с помощью in_bulk():
             cities = City.objects.filter(id__in=[from_city_id, to_city_id]).in_bulk() # здесь мы за 1 запрос получили 2 необходимых значения
-            print(trains_qs)
+
             
             # загружаем все вытащенные данные из HTML страницы в форму:
             form = RouteModelForm(
