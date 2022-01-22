@@ -1,0 +1,44 @@
+[
+{
+  "model": "cities.city",
+  "pk": 26,
+  "fields": {
+    "name": "à“≥ú“‘“"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 27,
+  "fields": {
+    "name": "π»ﬂ€‹"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 28,
+  "fields": {
+    "name": "ª≥“ﬂ¿‘"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 29,
+  "fields": {
+    "name": "±“∆≥€∆"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 30,
+  "fields": {
+    "name": "∫€ÿ"
+  }
+},
+{
+  "model": "cities.city",
+  "pk": 31,
+  "fields": {
+    "name": "π“≥€√"
+  }
+}
+]
