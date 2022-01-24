@@ -32,6 +32,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class CityDetailView(DetailView):
     context_object_name = "city_detail"
     queryset = City.objects.all()
+    template_name = 'cities/city_detail.html'
     
 
 class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
