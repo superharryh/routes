@@ -99,7 +99,7 @@ class RouteListView(ListView):
 
 
 class RouteDetailView(DetailView):
-    context_object_name = "route_details" # это название мы будем использовать в route_detail.html, чтобы вытаскивать детали из route
+    context_object_name = "route_details" # это название мы будем использовать в route_detail.html, чтобы вытаскивать детали из route:
     queryset = Route.objects.all()
     template_name = 'routes/route_detail.html'
     
